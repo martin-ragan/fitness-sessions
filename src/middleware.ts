@@ -1,24 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { validateSessionToken } from "@/lib/auth/get-session";
+import { getCurrentSession } from "./lib/get-current-session";
 
 export async function middleware(request: NextRequest) {
-	const sessionToken = request.cookies.get("session")?.value ?? null;
+	const session = await getCurrentSession();
 	const protectedPaths = ["/workouts"];
 	const isProtected = protectedPaths.some((path) =>
 		request.nextUrl.pathname.startsWith(path)
 	);
-
-    console.log("middleware", sessionToken);
-	if (!sessionToken) {
-		if (isProtected) {
-			return NextResponse.redirect(new URL("/", request.url));
-		}
-
-		return NextResponse.next();
-	}
-
-
-	const session = await validateSessionToken(sessionToken);
 
 	if (!session) {
 		if (isProtected) {

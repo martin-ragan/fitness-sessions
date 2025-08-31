@@ -20,7 +20,7 @@ export const signUp = async (formData: FormData) => {
   try {
     const user = await createUser(email, hashedPassword)
     console.log('returned user', user);
-    const session = await createSession();
+    const session = await createSession(user.id);
     console.log(session.token)
     const cookieStore = await cookies();
     cookieStore.set('session', session.token, {
@@ -67,15 +67,15 @@ export const signIn = async (formData: FormData) => {
       }
     }
   
-    const session = await createSession()
+    const session = await createSession(user.id)
   
     const cookieStore = await cookies();
-  cookieStore.set('session', session.token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/'
-  });
+    cookieStore.set('session', session.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/'
+    });
   
     return {
       success: true

@@ -11,6 +11,7 @@ export const users = pgTable("users", {
 export const sessions = pgTable("sessions", {
   id: text("id").primaryKey().notNull(),
   secret: bytea().notNull(),
+  userId: integer('user_id').references(() => users.id).notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow()
 });
 

@@ -8,12 +8,9 @@ const WorkoutsCreatePage = async () => {
     return;
   }
 
-  return (
-    <div>
-      <h1>Create Workout</h1>
-      <CreateWorkoutForm userId={session.userId}/>
-    </div>
-  );
+  return <CreateWorkoutForm
+    userId={session.userId}
+  />;
 };
 
 export default WorkoutsCreatePage;

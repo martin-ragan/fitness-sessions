@@ -4,11 +4,7 @@ import {
     workout_sessions, 
     series_sessions, 
     workouts, 
-    exercises,
-    InsertWorkoutSession,
-    InsertSeriesSession,
-    SelectWorkoutSession,
-    SelectSeriesSession 
+    exercises
 } from "./schema";
 import { 
     WorkoutWithExercises, 
@@ -16,6 +12,15 @@ import {
     WorkoutStats, 
     PreviousSetData 
 } from "@/types/workout.types";
+
+type SessionGroupType = {
+    id: number;
+    date: string;
+    exercises: Record<string, {
+        name: string;
+        sets: { reps: number; weight: number }[];
+    }>;
+};
 
 export const createWorkoutSession = async (workoutId: number, userId: number) => {
     const [newSession] = await db.insert(workout_sessions).values({
@@ -224,10 +229,10 @@ export const getWorkoutSessionHistory = async (workoutId: number, userId: number
         });
         
         return acc;
-    }, {} as Record<string, any>);
+    }, {} as Record<string, SessionGroupType>);
 
     // Convert to array and transform exercises object to array
-    return Object.values(groupedSessions).map((session: any) => ({
+    return Object.values(groupedSessions).map((session: SessionGroupType) => ({
         id: session.id,
         date: session.date,
         exercises: Object.values(session.exercises)

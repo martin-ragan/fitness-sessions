@@ -4,7 +4,6 @@ import { getCurrentSession } from '@/lib/get-current-session';
 import { createWorkoutSession, saveSeriesSession } from '@/db/workoutSession.service';
 import { redirect } from 'next/navigation';
 import { parseWorkoutSessionFormData } from '@/lib/validation';
-import { createActionError } from '@/types/actions';
 
 export async function saveWorkoutSession(workoutId: number, formData: FormData) {
   const session = await getCurrentSession();

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { positiveIntSchema, nonNegativeIntSchema, createRangeSchema } from '../utils';
+import { positiveIntSchema, createRangeSchema } from '../utils';
 import type { SetInputData } from '@/types/workout.types';
 
 /**

@@ -22,7 +22,7 @@ export const parseCreateWorkoutData = (data: {
 };
 
 // Alternative parser for direct form data (if needed in the future)
-export const parseWorkoutFormData = (formData: FormData) => {
+export const parseWorkoutFormData = (): never => {
   // This could be implemented if you have a form that submits workout data directly
   // Currently your workout creation is handled via component state
   throw new Error('Direct form data parsing for workouts not implemented - use parseCreateWorkoutData instead');

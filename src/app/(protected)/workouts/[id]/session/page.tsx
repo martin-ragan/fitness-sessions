@@ -38,7 +38,7 @@ const WorkoutSessionPage = async ({ params }: WorkoutSessionPageProps) => {
       
       return previousSessionData.find(
         data => data.exerciseId === exerciseId && data.setNumber === setNumber
-      );
+      ) || null;
     };
 
     return (

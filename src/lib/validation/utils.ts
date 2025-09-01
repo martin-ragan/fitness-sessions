@@ -36,7 +36,7 @@ export const createRangeSchema = (
 export const handleValidationError = (error: z.ZodError): ActionError => {
   const fieldErrors: Record<string, string[]> = {};
   
-  error.errors.forEach((err) => {
+  error.issues.forEach((err) => {
     const field = err.path.join('.');
     if (!fieldErrors[field]) {
       fieldErrors[field] = [];
@@ -44,7 +44,7 @@ export const handleValidationError = (error: z.ZodError): ActionError => {
     fieldErrors[field].push(err.message);
   });
   
-  const mainError = error.errors[0]?.message || 'Validation failed';
+  const mainError = error.issues[0]?.message || 'Validation failed';
   return createActionError(mainError, fieldErrors);
 };
 

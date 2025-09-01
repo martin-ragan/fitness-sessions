@@ -1,11 +1,10 @@
 import { getCurrentSession } from '@/lib/get-current-session';
 import { getWorkoutWithExercises, getWorkoutSessionHistory, getWorkoutStats } from '@/db/workoutSession.service';
 import { redirect } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, TrendingUp } from 'lucide-react';
-import { WorkoutWithExercises, SessionHistoryItem, WorkoutStats } from '@/types/workout.types';
+import { ArrowLeft, Calendar } from 'lucide-react';
 
 interface WorkoutHistoryPageProps {
   params: {
